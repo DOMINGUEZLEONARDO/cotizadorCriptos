@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cripto Exchange</title>
     <link rel="stylesheet" href="./public/build/styles.css">
+    <link rel="stylesheet" href="./src/styles.css">
 </head>
 <body>    
     <header>
@@ -33,22 +34,30 @@
                 </select>
             </div>
             <div class="ml-12 h-10 ">
-                <label for="inversion" class="h-full flex items-center pl-4 w-40 text-sm font-medium text-gray-900 dark:text-white">Monto a Invertir</label>
+                <label for="inversion" class="h-full flex items-center pl-4 w-40 text-sm font-medium text-gray-900 dark:text-white" id="importe">Monto a Invertir</label>
                 <input type="inversion" id="inversion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="$" pattern="$" required>
             </div>
             <div class="ml-12 h-10">
                 <label for="criptomoneda" class="h-full flex items-center pl-4 w-40 text-sm font-medium text-gray-900 dark:text-white">Criptomoneda</label>
                 <select id="criptomoneda" class="bg-gray-50 w-48 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Seleccione una opción</option>
-                    <option value="BTC">Bitcoin</option>
-                    <option value="USDT">Tether</option>
-                    <option value="ETH">Ethereum</option>
-                    <option value="BNB">Binance Coin</option>
+                    <option id="m"selected>Seleccione una opción</option>
+                    <option type="text" value="bitcoin" id="bitcoin">Bitcoin</option>
+                    <option type="text" id="tether" value="tether" >Tether</option>
+                    <option value="ethereum">Ethereum</option>
+                    <option value="binanceCoin">Binance Coin</option>
                 </select>
             </div>
             <div class="ml-12 h-10 ">
                 <label for="cotizacion" class="h-full flex items-center pl-4 w-40 text-sm font-medium text-gray-900 dark:text-white">Cotización</label>
-                <input type="cotizacion" id="cotizacion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="$" pattern="$" required>
+                <div type="number"  id="valor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="$" pattern="$" required>$</div>
+
+
+            
+            </div>
+
+            <div>
+                <button id="boton" class="boton"   onclick="obtener()"> Cotizar </button>
+                                <!-- <p id="valor"> este es el resultado </p> -->
             </div>
         </div>
         <div class="imgFondo h-auto pt-12 pr-36 flex justify-end">

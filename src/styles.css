@@ -16,3 +16,20 @@ div.imgFondo{
     height:620px;
    
 }
+
+.boton{
+        padding: 10px 20px;
+        background-color: #2637ca;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 30px;
+        margin-top: 38px;
+      }
+.boton:hover {
+        background-color: #488ce6;
+      }
+.boton:active {
+        background-color: #3e468e;
+      }
