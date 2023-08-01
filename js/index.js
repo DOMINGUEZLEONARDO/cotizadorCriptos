@@ -6,6 +6,7 @@
 // let binanceCoin = 244
 let moneda 
 let importe
+let busqueda
 
 function Monedas (nombre, valor){
     this.nombre = nombre;
@@ -43,13 +44,33 @@ function calculador (importe, moneda) {
     }
         
 }
+const verificar = [
+    {
+        nombre: "bitcoin",
+    }, 
+    {
+        nombre: "tether",
+    }, 
+    {
+        nombre: "ethereum",
+    }, 
+    {
+        nombre: "binanceCoin",
+    }, 
 
-const verificar = ['bitcoin', 'tether','ethereum',"binanceCoin"];
+];
+
 
 function obtener(){
     importe = document.getElementById("inversion").value; 
     moneda = document.getElementById("criptomoneda").value;
-    console.log(verificar.includes(moneda));
+    
+
+ 
+    busqueda = verificar.find(
+    (si) => si.nombre === moneda
+    );
+   console.log(busqueda)
 
    if (moneda === "pesos"){
         alert("Disculpe, no vendemos papel pintado.")
