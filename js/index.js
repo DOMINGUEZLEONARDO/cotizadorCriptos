@@ -162,9 +162,12 @@ const resultado = document.getElementById("valor");
 boton. addEventListener('click',() => {
     resultado.innerHTML= obtener();
     let usuario = document.getElementById("usuario").value
+    let setMoneda = document.getElementById('fiat').value
     let compra = {
         persona: usuario,
-        cotizo: obtener()
+        cotizo: obtener(),
+        invercion: importe,
+        monSelec: setMoneda, 
         
         
     }
