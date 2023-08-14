@@ -6,6 +6,14 @@
 
 .campos{
    margin:80px;
+   margin-left: 0px;
+   display: flex;
+   justify-content: left;
+ 
+  
+}
+.fiat{
+  margin: 10px;
 }
 
 div.imgFondo{
