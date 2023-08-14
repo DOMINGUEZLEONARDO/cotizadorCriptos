@@ -54,19 +54,27 @@
 
             
             </div>
+            <div class="ml-12 h-10 " >
+                <label for="nombre" class="h-full flex items-center pl-4 w-40 text-sm font-medium text-gray-900 dark:text-white"id="nombre">Nombre y Apellido</label>
+                <input type="text" id="usuario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese su nombre"  required>
+            </div>
+
+
 
             <div>
                 <button id="boton" class="boton"   onclick="obtener()"> Cotizar </button>
                                 <!-- <p id="valor"> este es el resultado </p> -->
             </div>
         </div>
+        <p id="fecha" class="fecha"></p>
         <div class="imgFondo h-auto pt-12 pr-36 flex justify-end">
             <img src="./img/fondo.png" alt="" class="h-120 object-contain imagen1">
         </div>
+        
     </main>
     
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/index.js"></script>
 </body>
 
