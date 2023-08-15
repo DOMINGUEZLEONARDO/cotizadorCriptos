@@ -174,9 +174,16 @@ boton. addEventListener('click',() => {
     if((usuario)===''){
         alert('El campo usuario es obligatorio')
     }else{
-    localStorage.setItem('Usuario',JSON.stringify(compra));
+        
+        localStorage.setItem('Usuario', JSON.stringify(compra));
+    
 }
+   
+         
+
 }
+ 
+
 )
 
 
