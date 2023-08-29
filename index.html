@@ -25,18 +25,18 @@
     </header>
     <main>
 
-    <div class="flex campos">
+<div id="datos" class="flex campos ">
             <div class="ml-36 h-10 fiat" >
                 <label for="fiat" class="h-full flex items-center pl-4 w-40 text-sm font-medium text-gray-900 dark:text-white">Inversión FIAT</label>
                 <select id="fiat" class="bg-gray-50 w-48 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Seleccione una opción</option>
                     <option value="USD">Dólares (USD)</option>
-                    <option value="ARS">Pesos (ARS)</option>
+                   
                 </select>
-    </div>
+            </div>
     <div class="ml-12 h-10 " >
                 <label for="nombre" class="h-full flex items-center pl-4 w-40 text-sm font-medium text-gray-900 dark:text-white"id="nombre">Nombre y Apellido</label>
-                <input type="text" id="usuario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese su nombre"  required>
+                <input type="text"  id="usuario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese su nombre"  required>
     </div>
             <div class="ml-12 h-10 ">
                 <label for="inversion" class="h-full flex items-center pl-4 w-40 text-sm font-medium text-gray-900 dark:text-white" id="importe">Monto a Invertir</label>
@@ -46,10 +46,10 @@
                 <label for="criptomoneda" class="h-full flex items-center pl-4 w-40 text-sm font-medium text-gray-900 dark:text-white">Criptomoneda</label>
                 <select id="criptomoneda" class="bg-gray-50 w-48 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option id="m"selected>Seleccione una opción</option>
-                    <option type="text" value="bitcoin" id="bitcoin">Bitcoin</option>
-                    <option type="text" id="tether" value="tether" >Tether</option>
-                    <option value="ethereum">Ethereum</option>
-                    <option value="binanceCoin">Binance Coin</option>
+                    <option type="text" value="BTC" id="bitcoin">Bitcoin</option>
+                    <option type="text" id="tether" value="USDT" >Tether</option>
+                    <option value="ETH">Ethereum</option>
+                    <option value="BNB">Binance Coin</option>
                 </select>
             </div>
           
@@ -70,15 +70,20 @@
             </div>
         </div>
         <p id="fecha" class="fecha"></p>
-        <div class="imgFondo h-auto pt-12 pr-36 flex justify-end">
+        <h2 id="cotizacionDia"></h2>
+        
+        
+        <div class="imgFondo h-auto pt-12 pr-36 ">
             <img src="./img/fondo.png" alt="" class="h-120 object-contain imagen1">
     </div>
+   
         
     </main>
     
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/index.js"></script>
+   
 </body>
 
 </html>

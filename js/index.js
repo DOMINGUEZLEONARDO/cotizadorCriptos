@@ -1,9 +1,4 @@
-// let importe =  prompt ("Ingrese capital a invertir U$S:");
-// let moneda = prompt ("Que Cripto desea? Bitcoin, Ethereum, Tether o Binance Coin").toLowerCase();
-// // let bitcoin = 30308
-// let ethereum = 1877
-// let tether = 1.015
-// let binanceCoin = 244
+
 
 Swal.fire({
     title: '¿Eres mayor de edad?',
@@ -16,14 +11,9 @@ Swal.fire({
     confirmButtonText: 'Sí'
   }).then((result) => {
     if (result.isDenied) {
-        // Swal.fire(
-        //     'No puedes acceder...',
-        //     'Eres menor de edad.',
-        //     'error',
-        //     // showConfirmbutton: false,
-        // )
+      
         Swal.fire({
-            // position: 'top-end',
+           
             icon: 'error',
             title: 'No puedes acceder.',
             showConfirmButton: false,
@@ -38,111 +28,119 @@ Swal.fire({
 })
 
 
-
+let setMoneda
 let moneda 
 let importe
 let busqueda
+let bitcoin 
+let tether 
+let binanceCoin 
+let ethereum
 
-function Monedas (nombre, valor){
-    this.nombre = nombre;
-    this.valor = valor;
+
+
+class Monedas {
+    constructor (nombre, valores){
+        this.nombre = nombre;
+        this.valores = valores;
+    }
 }
-let bitcoin = new Monedas ('bitcoin',30308);
-let ethereum = new Monedas ('ethereum',1877);
-let tether = new Monedas('tether', 1015);
-let binanceCoin = new Monedas ('binance Coin', 244);
+
+
+
+const consulta = async () => {
+    const respuesta = await fetch(`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,USDT,BNB&tsyms=USD,EUR`)
+   
+    // const respuesta = await fetch(`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=${setMoneda}`)
+    const valores = await respuesta.json()
+    console.log(valores)
+    bitcoin = new Monedas(`BTC`,parseFloat(valores.DISPLAY.BTC.USD.PRICE.replace('$','').replace(',','').trim()))
+    ethereum = new Monedas ('ETH',parseFloat(valores.DISPLAY.ETH.USD.PRICE.replace('$','').replace(',','').trim()));
+    tether = new Monedas('USDT', parseFloat(valores.DISPLAY.USDT.USD.PRICE.replace('$','').replace(',','').trim()));
+    binanceCoin = new Monedas ('BNB',parseFloat(valores.DISPLAY.BNB.USD.PRICE.replace('$','').replace(',','').trim()));
+
+}
 
 
 function calculador (importe, moneda) {
 
     switch(moneda){
-
-        case "bitcoin":
-        return  importe / bitcoin.valor;
-        break;
-
-        case "ethereum":
-        return importe / ethereum.valor;
-        break;
-
-        case "tether":
-        return importe / tether.valor;
-        break;
-
-        case "binanceCoin":
-        return importe / binanceCoin.valor;
+        case "BTC":
+        return  importe / bitcoin.valores;
         break;
         
+        case "ETH":
+        return importe / ethereum.valores;
+        break;
+            
+        case "USDT":
+        return importe / tether.valores;
+        break;
+                
+        case "BNB":
+        return importe / binanceCoin.valores;
+        break;
+                    
         default:
         return null;
         break;
     }
-        
+    
 }
+
+
 const verificar = [
     {
-        nombre: "bitcoin",
+        nombre: "BTC",
     }, 
     {
-        nombre: "tether",
+        nombre: "USDT",
     }, 
     {
-        nombre: "ethereum",
+        nombre: "ETH",
     }, 
     {
-        nombre: "binanceCoin",
+        nombre: "BNB",
     }, 
 
 ];
 
 
 function obtener(){
-  
-
     importe = document.getElementById("inversion").value; 
     moneda = document.getElementById("criptomoneda").value;
-    
-
- 
+    setMoneda = document.getElementById('fiat').value;
+  
     busqueda = verificar.find(
     (si) => si.nombre === moneda
     );
-//    console.log(busqueda)
 
-   if (moneda === "pesos"){
+    if (moneda === "pesos"){
         alert("Disculpe, no vendemos papel pintado.")
-     } else if (moneda !== "bitcoin" && moneda !== "ethereum" && moneda !== "tether" && moneda !== "binanceCoin"){
+    } else if (moneda !== "BTC" && moneda !== "ETH" && moneda !== "USDT" && moneda !== "BNB"){
             alert("No contamos con el activo que usted desea.")
-        }
-        
+    };
 
-      
     let shortName; 
-    if (moneda === "bitcoin") {
+    if (moneda === "BTC") {
         shortName = "BTC";
-    } else if (moneda === "ethereum") {
+    } else if (moneda === "ETH") {
         shortName = "ETH";
-    } else if (moneda === "tether") {
+    } else if (moneda === "USDT") {
         shortName = "USDT";
-    } else if (moneda === "binanceCoin") {
+    } else if (moneda === "BNB") {
         shortName = "BNB";
     } else {
         shortName = "";
     }
-
-    
 
     if (calculador(importe, moneda) !== null) {
         return  calculador(importe, moneda).toFixed(8) + " " + shortName;
     } else {
         return "No ingresó un activo válido"
     } 
-    
-    
 
 }
-
-
 
 
 const boton = document.getElementById("boton");
@@ -152,37 +150,54 @@ const boton = document.getElementById("boton");
     
 
 const resultado = document.getElementById("valor");
+const cotiDelDia = document.getElementById("cotizacionDia")
+
+for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i)
+    const value = localStorage.getItem(key)
+    const userDatos = JSON.parse(value)
+    console.log(userDatos)
+    const p = document.createElement("p");
+    p.textContent=`El usuario ${userDatos.persona} cotizó ${userDatos.cotizo}.`
+    cotiDelDia.appendChild(p)
+}
 
 
 
 
-
-
-
-boton. addEventListener('click',() => {
-    resultado.innerHTML= obtener();
+boton.addEventListener('click', async () => {
+    console.log(await consulta())
+    resultado.innerHTML = obtener();
     let usuario = document.getElementById("usuario").value
-    let setMoneda = document.getElementById('fiat').value
+    setMoneda = document.getElementById('fiat').value
     let compra = {
         persona: usuario,
         cotizo: obtener(),
-        invercion: importe,
-        monSelec: setMoneda, 
-        
-        
+        inversion: importe,
+        monSelec: setMoneda,
+
     }
-    if((usuario)===''){
-        alert('El campo usuario es obligatorio')
-    }else{
-        
-        localStorage.setItem('Usuario', JSON.stringify(compra));
-    
-}
    
-         
+    if( (usuario) === '' ) {
+        alert('El campo Nombre y Apellido es obligatorio')
+    }else{
+
+        localStorage.setItem(usuario, JSON.stringify(compra));
+        cotiDelDia.innerHTML = "";
+
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i)
+            const value = localStorage.getItem(key)
+            const userDatos = JSON.parse(value)
+            console.log(userDatos)
+            const p = document.createElement("p");
+            p.textContent=`El usuario ${userDatos.persona} cotizó ${userDatos.cotizo}. `
+            cotiDelDia.appendChild(p)
+        }
+}
+
 
 }
- 
 
 )
 
