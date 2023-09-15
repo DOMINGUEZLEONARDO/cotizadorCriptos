@@ -1,5 +1,9 @@
 
 
+const boton = document.getElementById("boton");
+const resultado = document.getElementById("valor");
+const cotiDelDia = document.getElementById("cotizacionDia")
+
 Swal.fire({
     title: '¿Eres mayor de edad?',
     text: "Solo los adultos pueden comprar cripto.",
@@ -51,15 +55,16 @@ class Monedas {
 const consulta = async () => {
     const respuesta = await fetch(`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,USDT,BNB&tsyms=USD,EUR`)
    
-    // const respuesta = await fetch(`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=${setMoneda}`)
+   
     const valores = await respuesta.json()
     console.log(valores)
     bitcoin = new Monedas(`BTC`,parseFloat(valores.DISPLAY.BTC.USD.PRICE.replace('$','').replace(',','').trim()))
     ethereum = new Monedas ('ETH',parseFloat(valores.DISPLAY.ETH.USD.PRICE.replace('$','').replace(',','').trim()));
     tether = new Monedas('USDT', parseFloat(valores.DISPLAY.USDT.USD.PRICE.replace('$','').replace(',','').trim()));
     binanceCoin = new Monedas ('BNB',parseFloat(valores.DISPLAY.BNB.USD.PRICE.replace('$','').replace(',','').trim()));
-
+    
 }
+
 
 
 function calculador (importe, moneda) {
@@ -91,19 +96,31 @@ function calculador (importe, moneda) {
 
 const verificar = [
     {
+        id:1,
+        moneda:"Bitcoin",
         nombre: "BTC",
     }, 
     {
+        id:2,
+        moneda:"Tether",
         nombre: "USDT",
     }, 
-    {
-        nombre: "ETH",
-    }, 
-    {
-        nombre: "BNB",
-    }, 
-
+   
 ];
+
+verificar.push(
+    {
+        id:3,
+        moneda: "Etherium",
+        nombre:"ETH",
+    },
+    {
+        id:4,
+        moneda: "Binance Coin",
+        nombre:"BNB"
+    }
+)
+
 
 
 function obtener(){
@@ -116,10 +133,11 @@ function obtener(){
     );
 
     if (moneda === "pesos"){
-        alert("Disculpe, no vendemos papel pintado.")
+        Swal.fire("Disculpe, no vendemos papel pintado.")
     } else if (moneda !== "BTC" && moneda !== "ETH" && moneda !== "USDT" && moneda !== "BNB"){
-            alert("No contamos con el activo que usted desea.")
+        Swal.fire("No contamos con el activo que usted desea.")
     };
+    
 
     let shortName; 
     if (moneda === "BTC") {
@@ -143,14 +161,7 @@ function obtener(){
 }
 
 
-const boton = document.getElementById("boton");
-    
 
-
-    
-
-const resultado = document.getElementById("valor");
-const cotiDelDia = document.getElementById("cotizacionDia")
 
 for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i)
@@ -179,7 +190,7 @@ boton.addEventListener('click', async () => {
     }
    
     if( (usuario) === '' ) {
-        alert('El campo Nombre y Apellido es obligatorio')
+        Swal.fire('El campo Nombre y Apellido es obligatorio')
     }else{
 
         localStorage.setItem(usuario, JSON.stringify(compra));
@@ -192,7 +203,10 @@ boton.addEventListener('click', async () => {
             console.log(userDatos)
             const p = document.createElement("p");
             p.textContent=`El usuario ${userDatos.persona} cotizó ${userDatos.cotizo}. `
-            cotiDelDia.appendChild(p)
+            cotiDelDia.appendChild(p)          
+          
+
+            
         }
 }
 
@@ -200,6 +214,7 @@ boton.addEventListener('click', async () => {
 }
 
 )
+
 
 
 const diaDeHoy = new Date();
